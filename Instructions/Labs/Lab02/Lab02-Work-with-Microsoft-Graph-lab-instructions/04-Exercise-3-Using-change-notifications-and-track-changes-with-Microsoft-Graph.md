@@ -44,9 +44,9 @@ In this exercise, you will create a new Azure AD web application registration us
 
 1. Enter a value in **Description,** select one of the options for **Expires,** and select **Add**.
 
-![Screenshot of the Add a client secret dialog](../../Linked_Image_Files/aad-portal-newapp-secret.png)
+    ![Screenshot of the Add a client secret dialog](../../Linked_Image_Files/aad-portal-newapp-secret.png)
 
-![Screenshot of the Add a client secret dialog](../../Linked_Image_Files/aad-portal-newapp-secret-02.png)
+    ![Screenshot of the Add a client secret dialog](../../Linked_Image_Files/aad-portal-newapp-secret-02.png)
 
 1. Copy the client secret value before you leave this page. You will need it later in the tutorial.
 
@@ -73,13 +73,17 @@ In this exercise, you will create a new Azure AD web application registration us
 
 1. Select **Grant admin consent for Contoso**, then select **Yes** to consent this application, and grant the application access to your tenant using the scopes you specified.
 
-![Screenshot approved admin consent](../../Linked_Image_Files/aad-portal-newapp-graphscope-04.png)
+    ![Screenshot approved admin consent](../../Linked_Image_Files/aad-portal-newapp-graphscope-04.png)
 
 ## Task 2: Create .NET Core App
 
 ### Run ngrok
 
 In order for the Microsoft Graph to send notifications to your application running on your development machine you need to use a tool such as ngrok to tunnel calls from the internet to your development machine. Ngrok allows calls from the internet to be directed to your application running locally without needing to create firewall rules.
+
+> **NOTE:** Graph requires using https and this lab uses ngrok free. 
+> 
+> If you run into any issues please visit [Using ngrok to get a public HTTPS address for a local server already serving HTTPS (for free)](https://camerondwyer.com/2019/09/23/using-ngrok-to-get-a-public-https-address-for-a-local-server-already-serving-https-for-free/)
 
 1. Run ngrok by executing the following from the command line:
 
@@ -122,8 +126,6 @@ In order for the Microsoft Graph to send notifications to your application runni
 1. Open the application in Visual Studio Code using the following command: `code .`
 
 1. If Visual Studio code displays a dialog box asking if you want to add required assets to the project, select **Yes**.
-
-1. If Visual Studio Code displays a dialog box asking if you want to add required assets to the project, select **Yes**.
 
 ## Task 3: Code the HTTP API
 

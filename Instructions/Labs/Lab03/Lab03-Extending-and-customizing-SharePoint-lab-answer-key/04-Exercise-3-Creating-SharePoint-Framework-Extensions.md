@@ -1,14 +1,15 @@
 ﻿# Exercise 3: Creating SharePoint Framework Extensions
+In this exercise, you will create a SPFx Application Customizer that will launch a Hello dialog on the load of the SharePoint modern page.
 
 ## Task 1: Create your project
 
-1. From the PowerShell command prompt, change to the C:/LabFiles/SharePoint directory by executing the following command: cd c:/LabFiles/SharePoint
+1. From the PowerShell command prompt, change to the C:/LabFiles/SharePoint directory by executing the following command: `cd c:/LabFiles/SharePoint`
 
-1. Make a new directory for your SharePoint project files by executing the following command: md SPFxAppCustomizer
+1. Make a new directory for your SharePoint project files by executing the following command: `md SPFxAppCustomizer`
 
 1. Navigate to the newly created SharePoint directory by executing the following command: `cd SPFxAppCustomizer`
 
-1. Run the SharePoint Yeoman generator by executing the following command: yo @microsoft/sharepoint
+1. Run the SharePoint Yeoman generator by executing the following command: `yo @microsoft/sharepoint`
 
 1. Use the following to complete the prompt that is displayed:
 
@@ -32,11 +33,11 @@
 
 1. After provisioning the folders required for the project, the generator will install all the dependency packages using NPM.
 
-1. Open the project in Visual Studio Code by executing the following command: code .
+1. Open the project in Visual Studio Code by executing the following command: `code .`
 
 1. From the Visual Studio Code **Terminal** prompt, execute the following command: `gulp trust-dev-cert`
 
-    **Note**:
+    **NOTE:**
     Extensions must be tested in a modern SharePoint page unlike web parts, which can be tested in the local workbench. In addition, extensions also require special URL parameters when requesting the page to load the extension from the local development web server.
 
 1. Obtain the URL of a modern SharePoint page.
@@ -49,11 +50,12 @@
 
     1. Run the project by executing the following command: `gulp serve`
 
+
 1. When the SharePoint page loads, SharePoint will prompt you to load the debug scripts. This Is a confirmation check to ensure you really want to load scripts from an untrusted source. In this case, that is your local development web server on https://localhost, which you can trust.
 
     1. Select the button **Load debug scripts**.
     
-    1. Once the scripts load, a SharePoint dialog alert box will be shown: This alert box is shown by the application customizer. Open the application customizer file located at **./src/extensions/helloAppCustomizer/HelloAppCustomizerApplicationCustomizer.ts** and find the **OnInit()** method. Notice the following line in the method that is triggering the dialog to appear: `Dialog.alert(`Hello from ${strings.Title}:\n\n${message}`);`
+    1. Once the scripts load, a SharePoint dialog alert box will be shown: This alert box is shown by the application customizer. Open the application customizer file located at **./src/extensions/helloAppCustomizer/HelloAppCustomizerApplicationCustomizer.ts** and find the **OnInit()** method. Notice the following line in the method that is triggering the dialog to appear: ``Dialog.alert(`Hello from ${strings.Title}:\n\n${message}`);``
 
 1. Stop the local web server by pressing CTRL+C in the console/terminal window.
 
@@ -63,7 +65,7 @@
 
 1. When prompted, select the **Load debug scripts** button.
 
-1. Notice that when the page loads, the text defined in the public properties is displayed in the header and footer of the page.
+1. Notice when the page loads, a Hello (your name) dialog should appear.
 
 1. Stop the local web server by pressing CTRL+C in the console/terminal window.
 
@@ -80,8 +82,10 @@
     ```powershell
     gulp build
     gulp bundle --ship
-    gulp package-solution –-ship
+    gulp package-solution --ship
     ```
+    **NOTE:**
+    If this error `The build failed because a task wrote output to stderr.` is displayed on the command console, please ignore it. The reason is that the build output contain a warning.
 
 1. In the browser, navigate to your SharePoint Online tenant App Catalog site.
 
@@ -101,14 +105,13 @@
 
 1. Select **Tenant Wide Extensions**. Depending on when your tenant was created the Tenant Wide Extensions list may be hidden. If you do not see the list in the Site Contents then you will have to navigate to it manually. Do this by appending **/Lists/TenantWideExtensions/AllItems.aspx** to the URL of the app catalog site.
 
-1. In a separate browser window, navigate to any modern page in any modern site within your SharePoint Online tenant. You should see the extension appear in the tenant.
+2. In a separate browser window, navigate to any modern page in any modern site within your SharePoint Online tenant. If this extension has been deployed successfully you should see a Hello (your name) dialog prompt on the load of the page.
 
-    **Note**:
+    **NOTE:**
     It may take up to 20 minutes for a Tenant Wide Extension to get deployed across the SharePoint Online tenant so you may need to wait to fully test whether your deployment was successful.
 
-1. Stop the local web server by pressing CTRL+C in the console/terminal window.
+3. Stop the local web server by pressing CTRL+C in the console/terminal window.
 
 ## Review
 
 In this exercise, you learned how to create and deploy a custom header and footer extension that is applied to all sites in a SharePoint Online tenant.
-

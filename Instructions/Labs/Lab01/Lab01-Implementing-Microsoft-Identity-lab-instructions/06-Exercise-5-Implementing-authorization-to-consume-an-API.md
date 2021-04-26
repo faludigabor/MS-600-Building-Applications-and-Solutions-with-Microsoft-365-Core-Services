@@ -16,7 +16,10 @@ The sample application used in this exercise enables a JavaScript SPA to query t
 
 1. Download the sample project for Node.js:
 
-    1. To run the project by using a local web server, such as Node.js, download the project files to your **C:/Labfiles** directory.[https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/archive/quickstart.zip](https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/archive/quickstart.zip)
+    1. To run the project by using a local web server, such as Node.js, download the project files to your **C:/Labfiles** directory.
+
+        Visit [https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/releases](https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/releases) and download the latest release: **Source code (zip)**.
+
 
 1. Navigate to where the download zip file is and unblock file.
 
@@ -48,9 +51,9 @@ Follow these steps if you choose to use the Node.js project. For Node.js, you ca
 
 1. To set up a redirect URL in the application registration information, switch back to the **Application Registration** pane, and do either of the following:
 
-    1. Set **http://localhost:30662/** as the **Redirect URL**.
+    1. Set **`http://localhost:30662/`** as the **Redirect URL**.
 
-    1. If you're using a custom TCP port, use **http://localhost:[port]/** (where **[port]** is the custom TCP port number).
+    1. If you're using a custom TCP port, use **`http://localhost:[port]/`** (where **[port]** is the custom TCP port number).
 
 1. Select **Register**.
 
@@ -86,7 +89,7 @@ Follow these steps if you choose to use the Node.js project. For Node.js, you ca
 
     1. Wait for **Preparing for consent** to finish then select **Grant admin consent for Contoso**.
 
-    1. From the Permissions requested dialog, select **Accept**.
+    1. From the Permissions requested dialog, select **Yes**.
 
     1. Your **JavaScript-SPA-App** app is now configured and authorized to use the Calendars.Read and People.Read permissions for Microsoft Graph.
 
@@ -109,14 +112,14 @@ Follow these steps if you choose to use the Node.js project. For Node.js, you ca
     <div class="leftContainer">
         <p id="WelcomeMessage">Welcome to the Microsoft Authentication Library For Javascript Quickstart</p>
         <button id="SignIn" onclick="signIn()">Sign In</button>
-    <button id="Share" onclick="acquireTokenPopupAndCallMSGraphInc()">Share</button>
+    <button id="Share" onclick="acquireTokenPopupAndCallMSGraph()">Share</button>
     </div>
     ```
 
-1. Locate the object **requestIncObj** and change the scopes to **people.read**.
+1. Locate the object **requestObj** and change the scopes to **people.read**.
 
     ```javascript
-    var requestIncObj = {
+    var requestObj = {
             scopes: ["people.read"]
         };
     ```
@@ -125,24 +128,24 @@ Follow these steps if you choose to use the Node.js project. For Node.js, you ca
 
     ```javascript
     var graphConfig = {
-            graphMeEndpoint: https://graph.microsoft.com/v1.0/me,
-    graphPeopleEndpoint: "https://graph.microsoft.com/v1.0/people"
+            graphMeEndpoint: "https://graph.microsoft.com/v1.0/me",
+            graphPeopleEndpoint: "https://graph.microsoft.com/v1.0/people"
         };
     ```
 
-1. Create a new endpoint for **people.read** and replace the method **acquireTokenPopupAndCallIncMSGraph** with the code below.
+1. Create a new endpoint for **people.read** and replace the method **acquireTokenPopupAndCallMSGraph** with the code below.
 
     ```javascript
-    function acquireTokenPopupAndCallIncMSGraph() {
+    function acquireTokenPopupAndCallMSGraph() {
             //Always start with acquireTokenSilent to obtain a token in the signed in user from cache
-            myMSALObj.acquireTokenSilent(requestIncObj).then(function (tokenResponse) {
+            myMSALObj.acquireTokenSilent(requestObj).then(function (tokenResponse) {
                 callMSGraph(graphConfig.graphMePeopleEndpoint, tokenResponse.accessToken, graphAPICallback);
             }).catch(function (error) {
                 console.log(error);
                 // Upon acquireTokenSilent failure (due to consent or interaction or login required ONLY)
                 // Call acquireTokenPopup(popup window)
                 if (requiresInteraction(error.errorCode)) {
-                    myMSALObj.acquireTokenPopup(requestIncObj).then(function (tokenResponse) {
+                    myMSALObj.acquireTokenPopup(requestObj).then(function (tokenResponse) {
                         callMSGraph(graphConfig.graphPeopleEndpoint, tokenResponse.accessToken, graphAPICallback);
                     }).catch(function (error) {
                         console.log(error);
@@ -178,7 +181,7 @@ Follow these steps if you choose to use the Node.js project. For Node.js, you ca
     node server.js
     ```
 
-1. From the browser, launch **http://localhost:30662**.
+1. From the browser, launch: **`http://localhost:30662`**
 
     ![Call localhost 30662 showing sign in screen.](../../Linked_Image_Files/l01_exercise_5_task_3_image_4.png)
 
@@ -199,4 +202,3 @@ Follow these steps if you choose to use the Node.js project. For Node.js, you ca
 ## Review
 
 In this exercise, you implemented authorization and incremental consent using the Microsoft Identity.
-
